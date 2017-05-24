@@ -1,0 +1,67 @@
+{
+  "name": "ml-react",
+  "version": "1.0.0",
+  "description": "Relay App with Express and GraphQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "babel-node ./server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haroldSanchezb/ml-react.git"
+  },
+  "keywords": [
+    "React",
+    "Relay",
+    "GraphQL",
+    "Express"
+  ],
+  "author": "Harold Sanchez Balaguera",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/haroldSanchezb/ml-react/issues"
+  },
+  "homepage": "https://github.com/haroldSanchezb/ml-react#readme",
+  "dependencies": {
+    "autoprefixer": "^7.1.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-relay": "^1.0.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-runtime": "^6.23.0",
+    "classnames": "^2.2.5",
+    "css-loader": "^0.28.2",
+    "dataloader": "^1.3.0",
+    "express": "^4.15.3",
+    "express-graphql": "^0.6.5",
+    "graphql": "^0.9.6",
+    "graphql-relay": "^0.5.1",
+    "node-fetch": "^1.7.0",
+    "postcss-loader": "^2.0.5",
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-relay": "^1.0.0",
+    "react-router-dom": "^4.1.1",
+    "style-loader": "^0.18.1",
+    "webpack": "^2.6.0",
+    "webpack-dev-server": "^2.4.5",
+    "whatwg-fetch": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "case-sensitive-paths-webpack-plugin": "^2.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-fbjs": "^1.1.1",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-flowtype": "^2.33.0",
+    "eslint-plugin-react": "^7.0.1",
+    "node-sass": "^4.5.3",
+    "relay-compiler": "^1.0.0"
+  }
+}

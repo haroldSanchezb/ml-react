@@ -24,20 +24,6 @@ graphQLServer.listen(GRAPHQL_PORT, () => console.log(
 // App Server
 const compiler = webpack({
   entry: ['whatwg-fetch', path.resolve(__dirname, 'js', 'index.js')],
-  module: {
-    loaders: [
-      {
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        test: /\.js$/,
-      },
-      {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        loader: 'style!css?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss'
-      },
-    ],
-  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new CaseSensitivePathsPlugin(),
@@ -52,10 +38,37 @@ const compiler = webpack({
               'not ie < 9',
             ],
           }),
-        ]
-      }
+        ],
+      },
     }),
   ],
+  module: {
+    loaders: [
+      {
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        test: /\.js$/,
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loader: [
+          'style-loader',
+          'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]',
+          'postcss-loader',
+        ],
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        loader: [
+          'style-loader',
+          'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]',
+          'sass-loader',
+        ],
+      },
+    ],
+  },
   output: {filename: 'app.js', path: '/'},
 });
 const app = new WebpackDevServer(compiler, {

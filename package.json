@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "babel-node ./server.js",
+    "get-schema": "node scripts/getSchema.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,0 +1,41 @@
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+type Price {
+  currency: String
+  amount: Int
+  decimals: Int
+}
+
+type Product implements Node {
+  # The ID of an object
+  id: ID!
+  productId: String
+  title: String
+  price: Price
+  thumbnail: String
+  picture: String
+  condition: String
+  shipping: Boolean
+}
+
+type Query {
+  search(id: ID!): Search
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+  product(id: ID!): Product
+}
+
+type Search implements Node {
+  # The ID of an object
+  id: ID!
+  query: String
+  items: [Product]
+}

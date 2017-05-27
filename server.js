@@ -23,7 +23,7 @@ graphQLServer.listen(GRAPHQL_PORT, () => console.log(
 
 // App Server
 const compiler = webpack({
-  entry: ['whatwg-fetch', path.resolve(__dirname, 'js', 'index.js')],
+  entry: ['whatwg-fetch', path.resolve(__dirname, 'src', 'index.js')],
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new CaseSensitivePathsPlugin(),

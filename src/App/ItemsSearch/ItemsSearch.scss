@@ -1,0 +1,51 @@
+@import 'src/styles/variables';
+
+.header {
+  align-items: center;
+  background: $primary;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  justify-content: center;
+
+  &__logo {
+    align-items: center;
+    display: flex;
+    grid-column-end: 3;
+    grid-column-start: 2;
+    justify-content: center;
+
+    img {
+      height: 38px;
+    }
+  }
+
+  &__search {
+    display: grid;
+    grid-column-end: 12;
+    grid-column-start: 3;
+    grid-template-columns: 11fr 1fr;
+    grid-template-rows: 38px;
+
+    &-input {
+      font-size: 18px;
+      border: 0;
+      border-radius: 3px 0 0 3px;
+      padding: 10px 20px;
+
+      &::placeholder {
+        color: $secondary-text;
+      }
+    }
+
+    &-button {
+      padding: 0;
+      border: 0;
+      border-radius: 0 3px 3px 0;
+      width: 38px;
+
+      img {
+        height: 18px;
+      }
+    }
+  }
+}

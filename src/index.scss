@@ -1,7 +1,22 @@
 @import './styles/variables';
 
+html {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
 body {
+  @extend html;
   background: $background;
   color:  $primary-text;
   font-family: $font-family;
+  display: grid;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 12fr;
+  grid-template-rows: 56px auto 100px;
 }

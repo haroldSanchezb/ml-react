@@ -6,6 +6,8 @@ import webpack from 'webpack';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import WebpackDevServer from 'webpack-dev-server';
 import schema from './schema';
+import ExtractTextPlugin  from 'extract-text-webpack-plugin';
+
 
 const APP_PORT = 3000;
 const GRAPHQL_PORT = 8080;
@@ -25,6 +27,7 @@ graphQLServer.listen(GRAPHQL_PORT, () => console.log(
 const compiler = webpack({
   entry: ['whatwg-fetch', path.resolve(__dirname, 'src', 'index.js')],
   plugins: [
+    new ExtractTextPlugin('styles.css'),
     new webpack.HotModuleReplacementPlugin(),
     new CaseSensitivePathsPlugin(),
     new webpack.LoaderOptionsPlugin({
@@ -50,21 +53,17 @@ const compiler = webpack({
         test: /\.js$/,
       },
       {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        loader: [
-          'style-loader',
-          'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]',
-          'postcss-loader',
-        ],
-      },
-      {
         test: /\.scss$/,
         exclude: /node_modules/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader',
+        }),
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
         loader: [
-          'style-loader',
-          'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]',
-          'sass-loader',
+          'file-loader?name=[hash:8].[ext]&publicPath=static/&outputPath=media/',
         ],
       },
     ],
@@ -74,7 +73,7 @@ const compiler = webpack({
 const app = new WebpackDevServer(compiler, {
   contentBase: '/public/',
   proxy: {'/graphql': `http://localhost:${GRAPHQL_PORT}`},
-  publicPath: '/js/',
+  publicPath: '/static/',
 });
 app.use('/', express.static(path.resolve(__dirname, 'public')));
 app.listen(APP_PORT, () => {

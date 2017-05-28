@@ -58,3 +58,4 @@ typings/
 .env
 
 __generated__/
+.DS_Store

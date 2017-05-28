@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import './index.scss';
+import styles from './index.scss';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+let root = document.querySelector('#root');
+root.className = styles.container;
+ReactDOM.render(<App />, root);

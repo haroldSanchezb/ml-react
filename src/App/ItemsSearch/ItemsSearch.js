@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
 import logo from '../../img/Logo_ML@2x.png.png';
 import searchIcon from '../../img/ic_Search.png';
 import styles from './ItemsSearch.scss';
 
 class ItemsSearch extends Component {
-  state = {
-    query: '',
-    redirect: false,
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      params: new URLSearchParams(props.location.search),
+      query: '',
+    };
+
+    this._onClick = this._onClick.bind(this);
   }
 
   _onQueryChange =  (evt) => {
@@ -16,15 +21,12 @@ class ItemsSearch extends Component {
 
   _onClick = () => {
     if (this.state.query.trim() !== '') {
-      this.setState({redirect: true});
+      const url = '/items?search=' + this.state.query.replace(' ', '+');
+      window.location = url;
     }
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect push to={'/items?search=' + this.state.query.replace(' ', '+')} />;
-    }
-
     return (
       <header className={styles.header}>
         <div className={styles.header__logo}>
@@ -36,6 +38,7 @@ class ItemsSearch extends Component {
             type="text"
             placeholder="Nunca dejes de buscar"
             className={styles['header__search-input']}
+            defaultValue={this.state.params.get('search')}
           />
           <button onClick={this._onClick} className={styles['header__search-button']}>
             <img src={searchIcon} alt=""/>

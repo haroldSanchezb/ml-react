@@ -63,7 +63,7 @@ const compiler = webpack({
       {
         test: /\.(jpe?g|png|gif|svg)$/,
         loader: [
-          'file-loader?name=[hash:8].[ext]&publicPath=static/&outputPath=media/',
+          'file-loader?name=[hash:8].[ext]&publicPath=/static/&outputPath=media/',
         ],
       },
     ],
@@ -75,7 +75,7 @@ const app = new WebpackDevServer(compiler, {
   proxy: {'/graphql': `http://localhost:${GRAPHQL_PORT}`},
   publicPath: '/static/',
 });
-app.use('/', express.static(path.resolve(__dirname, 'public')));
+app.use('/*', express.static(path.resolve(__dirname, 'public')));
 app.listen(APP_PORT, () => {
   console.log(`App is now running on http://localhost:${APP_PORT}`);
 });

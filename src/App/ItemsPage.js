@@ -3,9 +3,10 @@ import { Route, Switch } from 'react-router-dom';
 import ItemsSearch from './ItemsSearch';
 import ItemsList from './ItemsList';
 import ItemsDetail from './ItemsDetail';
+import styles from './ItemsPage.scss';
 
 const ItemsPage = props => (
-  <div className="container">
+  <div className={styles.container}>
     <ItemsSearch {...props} />
     <Switch>
       <Route path="/items/:id" render={() => <ItemsDetail {...props} />} />

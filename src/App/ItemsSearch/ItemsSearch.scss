@@ -4,7 +4,7 @@
   align-items: center;
   background: $primary;
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: 1fr 0.5fr repeat(10, 1fr);
   justify-content: center;
 
   &__logo {
@@ -12,7 +12,7 @@
     display: flex;
     grid-column-end: 3;
     grid-column-start: 2;
-    justify-content: center;
+    justify-content: flex-start;
 
     img {
       height: 38px;
@@ -33,7 +33,7 @@
       padding: 10px 20px;
 
       &::placeholder {
-        color: $secondary-text;
+        color: $third-text;
       }
     }
 

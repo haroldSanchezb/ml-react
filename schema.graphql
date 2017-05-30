@@ -15,11 +15,13 @@ type Product implements Node {
   id: ID!
   productId: String
   title: String
+  description: String
   price: Price
   thumbnail: String
   picture: String
   condition: String
   shipping: Boolean
+  city: String
 }
 
 type Query {

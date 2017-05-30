@@ -28,8 +28,14 @@ function getSearch(query) {
     .then(json => json);
 }
 
-function getProduct(id) {
-  return getProductByURL(`/items/${id}/`);
+async function getProduct(id) {
+  let product = await getProductByURL(`/items/${id}/`);
+  const description = await getProductByURL(`/items/${id}/description`);
+
+  product.description = description.text;
+
+  return product;
+
 }
 
 function getProductByURL(relativeURL) {
@@ -89,6 +95,10 @@ const ProductType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: obj => obj.title,
     },
+    description: {
+      type: GraphQLString,
+      resolve: obj => obj.description,
+    },
     price: {
       type: PriceType,
       resolve: (obj, args) => ({
@@ -103,7 +113,7 @@ const ProductType = new GraphQLObjectType({
     },
     picture: {
       type: GraphQLString,
-      resolve: obj => obj.pictures && obj.pictures.url,
+      resolve: obj => obj.pictures && obj.pictures[0].url,
     },
     condition: {
       type: GraphQLString,
@@ -112,6 +122,10 @@ const ProductType = new GraphQLObjectType({
     shipping: {
       type: GraphQLBoolean,
       resolve: obj => obj.shipping.free_shipping,
+    },
+    city: {
+      type: GraphQLString,
+      resolve: obj => obj.seller_address.city && obj.seller_address.city.name,
     },
   }),
   interfaces: [nodeInterface],

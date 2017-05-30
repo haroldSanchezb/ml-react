@@ -5,9 +5,9 @@ import ItemsListItem from './ItemsListItem';
 import styles from './ItemsList.scss';
 
 const Items = ({ search }) => (
-  <main className={styles.items}>
+  <ol className={styles.items__list}>
     {search.items.map((item, key) => ( <ItemsListItem key={key} item={item} />))}
-  </main>
+  </ol>
 );
 
 const RenderApp = ({ error, props }) => {
@@ -16,7 +16,9 @@ const RenderApp = ({ error, props }) => {
   }
 
   return (
-    <Items  {...props} />
+    <main className={styles.main}>
+      <Items  {...props} />
+    </main>
   );
 };
 
@@ -36,8 +38,18 @@ class ItemsList extends Component {
       query ItemsListQuery($searchId: ID!) {
         search (id: $searchId) {
           items {
+            title,
             productId,
-            title
+            description,
+            price {
+              currency
+              amount
+              decimals
+            },
+            thumbnail,
+            condition,
+            shipping,
+            city
           }
         }
       }

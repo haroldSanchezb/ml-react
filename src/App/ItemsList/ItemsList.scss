@@ -1,3 +1,94 @@
-.items {
+@import 'src/styles/variables';
+
+.main {
   display: grid;
+}
+
+.items {
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr repeat(10, 1fr);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &-item {
+      background: $second-background;
+      grid-column-end: 12;
+      grid-column-start: 2;
+      padding: 16px;
+      position: relative;
+
+      // TODO: en el diseño no se menciona un hover pero lo agregue para mejorar diseño
+      &:hover,
+      &:active {
+        background: $hover;
+      }
+
+      &::after {
+        content: "";
+        border-bottom: 1px solid $primary-background;
+        position: absolute;
+        bottom: 0;
+        left: 16px;
+        right: 16px;
+      }
+
+      &:first-child {
+        border-radius: 4px 4px 0 0;
+      }
+
+      &:last-child {
+        &::after {
+          content: none;
+        }
+      }
+
+      &__link,
+      &__link:active,
+      &__link:visited {
+        text-decoration: none;
+        color: $primary-text;
+        display: grid;
+        grid-template-columns: 180px 0.1fr auto minmax(auto, 250px);
+        grid-template-rows: 56px 124px;
+        grid-column-gap: 20px;
+      }
+
+      &__thumbnail {
+        border-radius: 4px;
+        height: 180px;
+      }
+
+      &__price {
+        font-size: 24px;
+        margin: 0;
+        padding: 0;
+      }
+
+      &__shipping {
+        img {
+          width: 24px;
+        }
+      }
+
+      &__title {
+        grid-row-start:    2;
+        grid-row-end:      3;
+        grid-column-end: 4;
+        grid-column-start: 2;
+        margin: 0;
+        padding: 0;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      &__city {
+        align-self: flex-end;
+        text-transform: capitalize;
+        // TODO: En el diseño piden 12 pero se ve mejor con 14
+        font-size: 14px;
+      }
+    }
+  }
 }

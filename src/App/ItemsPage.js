@@ -9,8 +9,8 @@ const ItemsPage = props => (
   <div className={styles.container}>
     <ItemsSearch {...props} />
     <Switch>
-      <Route path="/items/:id" render={() => <ItemsDetail {...props} />} />
-      <Route exact path={props.match.url} render={() => <ItemsList {...props} />} />
+      <Route path="/items/:productId" render={() => <ItemsDetail {...props} />} />
+      <Route path="/items" render={() => <ItemsList {...props} />} />
     </Switch>
   </div>
 );

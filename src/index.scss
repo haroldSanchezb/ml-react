@@ -9,10 +9,11 @@ html {
 
 body {
   @extend html;
-  background: $background;
+  background: $primary-background;
   color:  $primary-text;
   font-family: $font-family;
   display: grid;
+  overflow-x: hidden;
 }
 
 .container {

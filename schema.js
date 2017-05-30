@@ -30,9 +30,11 @@ function getSearch(query) {
 
 async function getProduct(id) {
   let product = await getProductByURL(`/items/${id}/`);
+  const category = await getProductByURL(`/categories/${product.category_id}/`);
   const description = await getProductByURL(`/items/${id}/description`);
 
   product.description = description.text;
+  product.categories = category.path_from_root;
 
   return product;
 
@@ -67,6 +69,18 @@ const {
     return null;
   }
 );
+
+const CategoryType = new GraphQLObjectType({
+  name: 'Category',
+  fields: () => ({
+    id: {
+      type: GraphQLString,
+    },
+    name: {
+      type: GraphQLString,
+    },
+  }),
+});
 
 const PriceType = new GraphQLObjectType({
   name: 'Price',
@@ -131,6 +145,10 @@ const ProductType = new GraphQLObjectType({
       type: GraphQLInt,
       resolve: obj => obj.sold_quantity,
     },
+    categories: {
+      type: new GraphQLList(CategoryType),
+      resolve: obj => obj.categories,
+    },
   }),
   interfaces: [nodeInterface],
 });
@@ -142,6 +160,10 @@ const SearchType = new GraphQLObjectType({
     query: {
       type: GraphQLString,
       resolve: obj => obj.query,
+    },
+    categories: {
+      type: new GraphQLList(CategoryType),
+      resolve: obj => obj.filters.length > 0 ? obj.filters[0].values[0].path_from_root : [],
     },
     items: {
       type: new GraphQLList(ProductType),

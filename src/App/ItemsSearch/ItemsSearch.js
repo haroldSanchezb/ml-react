@@ -3,6 +3,8 @@ import logo from '../../img/Logo_ML@2x.png.png';
 import searchIcon from '../../img/ic_Search.png';
 import styles from './ItemsSearch.scss';
 
+const ENTER_KEY_CODE = 13;
+
 class ItemsSearch extends Component {
   constructor(props) {
     super(props);
@@ -26,15 +28,26 @@ class ItemsSearch extends Component {
     }
   }
 
+  _onEnter = (evt) => {
+    if (evt.keyCode === ENTER_KEY_CODE) {
+      this._onClick();
+    }
+  }
+
+  _goHome = () => {
+    window.location = '/';
+  }
+
   render() {
     return (
       <header className={styles.header}>
-        <div className={styles.header__logo}>
+        <div onClick={this._goHome} className={styles.header__logo}>
           <img src={logo} alt=""/>
         </div>
         <div className={styles.header__search}>
           <input
-          onChange={this._onQueryChange}
+            onKeyDown={this._onEnter}
+            onChange={this._onQueryChange}
             type="text"
             placeholder="Nunca dejes de buscar"
             className={styles['header__search-input']}

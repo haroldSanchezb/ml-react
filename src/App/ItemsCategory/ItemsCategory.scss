@@ -1,0 +1,33 @@
+@import 'src/styles/variables';
+
+.category {
+  &__list {
+    grid-column: 2 / span 10;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0 0 16px;
+    justify-content: flex-start;
+    padding: 0;
+
+    &-item {
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: $secondary-text;
+
+      &::after {
+        content: "\0203A";
+        margin-left: 10px;
+        font-size: 24px;
+      }
+
+      &:last-child {
+        &::after {
+          content: none;
+        }
+      }
+    }
+  }
+}

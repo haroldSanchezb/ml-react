@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../createRelayEnvironment';
 import { FormattedNumber } from 'react-intl';
+import ItemsCategory from '../ItemsCategory';
 import styles from './ItemsDetail.scss';
 
 const Item = ({ product }) => (
@@ -37,8 +38,11 @@ const RenderApp = ({ error, props }) => {
     return null;
   }
 
+  document.title = props.product.title.concat(' - Mercado Libre');
+
   return (
     <main className={styles.main}>
+      <ItemsCategory  {...props} />
       <Item  {...props} />
     </main>
   );
@@ -49,6 +53,9 @@ class ItemsDetail extends Component {
     const query = graphql`
       query ItemsDetailQuery($productId: ID!) {
         product (id: $productId) {
+          categories {
+            name
+          },
           title,
           productId,
           description,

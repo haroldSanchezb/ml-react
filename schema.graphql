@@ -1,3 +1,8 @@
+type Category {
+  id: String
+  name: String
+}
+
 # An object with an ID
 interface Node {
   # The id of the object.
@@ -23,6 +28,7 @@ type Product implements Node {
   shipping: Boolean
   city: String
   sold: Int
+  categories: [Category]
 }
 
 type Query {
@@ -40,5 +46,6 @@ type Search implements Node {
   # The ID of an object
   id: ID!
   query: String
+  categories: [Category]
   items: [Product]
 }

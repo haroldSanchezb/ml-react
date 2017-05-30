@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import environment from '../createRelayEnvironment';
+import ItemsCategory from '../ItemsCategory';
 import ItemsListItem from './ItemsListItem';
 import styles from './ItemsList.scss';
 
@@ -17,6 +18,7 @@ const RenderApp = ({ error, props }) => {
 
   return (
     <main className={styles.main}>
+      <ItemsCategory  {...props} />
       <Items  {...props} />
     </main>
   );
@@ -27,6 +29,7 @@ class ItemsList extends Component {
     super(props);
 
     const params = new URLSearchParams(props.location.search);
+    document.title = params.get('search').concat(' - Mercado Libre');
 
     this.state = {
       search: params.get('search').replace(' ', '+'),
@@ -37,6 +40,9 @@ class ItemsList extends Component {
     const query = graphql`
       query ItemsListQuery($searchId: ID!) {
         search (id: $searchId) {
+          categories {
+            name
+          },
           items {
             title,
             productId,

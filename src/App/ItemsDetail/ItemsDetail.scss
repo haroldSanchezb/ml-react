@@ -1,7 +1,69 @@
+@import 'src/styles/variables';
+
 .main {
   display: grid;
+  grid-template-columns: 1fr 0.5fr repeat(10, 1fr);
+  margin: 0;
+  padding: 0;
 }
 
 .item {
+  margin: 0;
+  padding: 32px;
+  background: $second-background;
+  grid-column: 2 / span 10;
+  display: grid;
+  grid-template-columns: 9fr 3fr;
+  grid-template-rows: 700px auto;
 
+  &__content {
+    display: grid;
+
+    &-picture {
+      margin: 0 auto;
+    }
+
+    &-text {
+      align-self: flex-end;
+      font-size: 28px;
+      font-weight: 500;
+      padding: 0;
+      margin: 0 0 32px;
+    }
+  }
+
+  &__description {
+    grid-row-start:    2;
+    grid-column: 1 / span 2;
+    font-size: 16px;
+  }
+
+  &__detail {
+    font-size: 14px;
+    font-weight: 500;
+
+    &-title {
+      font-size: 24px;
+      margin: 16px 0 0;
+      padding: 0;
+    }
+
+    &-price {
+      font-size: 46px;
+      padding: 0;
+      margin: 32px 0;
+    }
+
+    &-button {
+      font-size: 20px;
+      padding: 15px;
+      margin: 0;
+      border: 0;
+      width: 100%;
+      border-radius: 4px;
+      background: $primary-botton;
+      color: $second-background;
+      cursor: pointer;
+    }
+  }
 }

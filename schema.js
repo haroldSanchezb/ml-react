@@ -127,6 +127,10 @@ const ProductType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: obj => obj.seller_address.city && obj.seller_address.city.name,
     },
+    sold: {
+      type: GraphQLInt,
+      resolve: obj => obj.sold_quantity,
+    },
   }),
   interfaces: [nodeInterface],
 });

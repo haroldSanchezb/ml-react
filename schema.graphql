@@ -22,6 +22,7 @@ type Product implements Node {
   condition: String
   shipping: Boolean
   city: String
+  sold: Int
 }
 
 type Query {
